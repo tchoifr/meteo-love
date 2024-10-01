@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    text-align: center;
+}
+
+h1 {
+    color: #032391;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px 40px 20px 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    background-color: #eff3f9;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+select,
+input[type="number"] {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #032391;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e62e5d;
+}
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.period-display {
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: left;
+}
+
+.period-display p {
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    display: flex;
+    overflow-x: auto; /* Défilement horizontal */
+    scroll-behavior: smooth; /* Défilement fluide */
+    white-space: nowrap; /* Empêche les éléments de passer à la ligne */
+    padding: 20px;
+    gap: 10px; /* Ajoute un espace entre les cartes */
+    -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur mobile */
+    background-color: #eff3f9;
+    margin-top: 15px;
+}
+
+
+
+.card {
+    background-color: rgb(255, 255, 255);
+    width: 240px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 5px; /* Espacement entre les cartes */
+    flex-shrink: 0; /* Empêche les cartes de rétrécir */
+}
+
+.card-image-container {
+    padding: 10px;
+}
+
+.card-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.card-title-container {
+    padding: 10px;
+    word-wrap: break-word; /* Casser le mot s'il dépasse la largeur */
+    white-space: normal;   /* Permet au texte de passer à la ligne */
+}
+
+
+.card-title {
+    margin: 0;
+    padding: 10px;
+}
+
+.card-date-container {
+    padding: 10px;
+}
+
+.card-date {
+    padding: 10px;
+}
+
+.weather-info img {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
