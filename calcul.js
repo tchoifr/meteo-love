@@ -65,13 +65,19 @@ document.addEventListener("DOMContentLoaded", function () {
       ).getDate();
 
       const ovulationDay = daysInMonth - 14; // Calculer le jour d'ovulation
-      const safeDays = [
-        ovulationDay - 1,
-        ovulationDay + 1,
-        ovulationDay + 2,
-        ovulationDay + 3,
-      ];
+      const riskDays = new Set();
 
+      // Période de fertilité : 5 jours avant l'ovulation et l'ovulation elle-même
+      for (let i = 0; i <= 5; i++) {
+        if (ovulationDay - i > 0) riskDays.add(ovulationDay - i);
+      }
+
+      // Jours de nidation : 6 jours après l'ovulation
+      for (let i = 1; i <= 6; i++) {
+        if (ovulationDay + i <= daysInMonth) riskDays.add(ovulationDay + i);
+      }
+
+      // Calcul des cartes
       for (let day = 1; day <= daysInMonth; day++) {
         const card = document.createElement("div");
         card.classList.add("card");
@@ -84,16 +90,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let windSpeed, humidity;
 
-        if (safeDays.includes(day)) {
-          card.classList.add("card-safe");
-          img.src = "/assets/sun_small.webp";
-          windSpeed = "0 km/h"; // Pas de vent pour jours sans risque
-          humidity = "90%"; // Humidité élevée pour jours sans risque
-        } else {
+        if (riskDays.has(day)) {
           card.classList.add("card-risk");
           img.src = "/assets/rain_small.webp";
           windSpeed = "90 km/h"; // Vent élevé pour jours à risque
           humidity = "0%"; // Humidité basse pour jours à risque
+        } else {
+          card.classList.add("card-safe");
+          img.src = "/assets/sun_small.webp";
+          windSpeed = "0 km/h"; // Pas de vent pour jours sans risque
+          humidity = "90%"; // Humidité élevée pour jours sans risque
         }
 
         imgBloc.appendChild(img);
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const h2 = document.createElement("h2");
         h2.classList.add("card-title");
 
-        h2.textContent = safeDays.includes(day) ? "35°" : "-10°"; // Température basée sur le risque
+        h2.textContent = riskDays.has(day) ? "-10°" : "35°"; // Température basée sur le risque
 
         h2Bloc.appendChild(h2);
         card.appendChild(h2Bloc);
