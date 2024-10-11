@@ -110,7 +110,7 @@ button:hover {
 .card-image {
     width: 70px;
     height: 70px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .card-title-container {
@@ -138,3 +138,106 @@ button:hover {
     height: 25px;
     margin-right: 5px;
 }
+.legende{
+    display: flex;
+    align-items: center;
+}
+.legende img{
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+    object-fit: contain;
+}
+.card-period {
+    background-image: url(./assets/regle.PNG);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 30px;
+    color: white; 
+}
+
+.card-period::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* This will inherit the background image */
+    filter: blur(10px); /* Adjust blur strength */
+    z-index: -1; /* Ensure the content is above this */
+    background-size: cover;
+}
+
+.card-risk {
+    background-image: url(./assets/orage.PNG);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 30px;
+    color: white; 
+}
+
+.card-risk::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* This will inherit the background image */
+    filter: blur(10px); /* Adjust blur strength */
+    z-index: -1; /* Ensure the content is above this */
+    background-size: cover;
+}
+
+.card-moderate-risk{
+    background-image: url(./assets/pluie.PNG);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 30px;
+    color: white; 
+}
+
+.card-moderate-risk::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* This will inherit the background image */
+    filter: blur(10px); /* Adjust blur strength */
+    z-index: -1; /* Ensure the content is above this */
+    background-size: cover;
+}
+
+.card-safe{
+    background-image: url(./assets/soleil.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 30px;
+    color: white; 
+}
+
+.card-safe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit; /* This will inherit the background image */
+    filter: blur(10px); /* Adjust blur strength */
+    z-index: -1; /* Ensure the content is above this */
+    background-size: cover;
+}
+
+

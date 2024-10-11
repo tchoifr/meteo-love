@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const calculateButton = document.getElementById("calculate-button");
   const carouselContainer = document.getElementById("carousel-container");
   const loader = document.getElementById("loader");
+  const cycleLengthInput = document.getElementById("cycle-length");
 
   const monthNames = [
     "Janvier",
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function populateYears() {
     const currentYear = new Date().getFullYear();
-    yearSelect.innerHTML = ""; // Réinitialiser les années
+    yearSelect.innerHTML = "";
     for (let i = currentYear; i <= currentYear + 10; i++) {
       const option = document.createElement("option");
       option.value = i;
@@ -37,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedYear = parseInt(yearSelect.value);
     const daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
 
-    daySelect.innerHTML = ""; // Réinitialiser les jours
-
+    daySelect.innerHTML = "";
     for (let day = 1; day <= daysInMonth; day++) {
       const option = document.createElement("option");
       option.value = day;
@@ -50,56 +50,103 @@ document.addEventListener("DOMContentLoaded", function () {
   monthSelect.addEventListener("change", updateDays);
   yearSelect.addEventListener("change", updateDays);
 
-  function createCards() {
-    loader.style.display = "flex"; // Afficher le loader
-    carouselContainer.innerHTML = ""; // Réinitialiser les cartes
+  function calculatePeriod(startDate, cycleLength) {
+    const periodDays = new Set();
+    const riskDays = new Set();
+    const moderateRiskDays = new Set();
 
-    // Démarrer un délai pour simuler le chargement
+    const lastPeriodDate = new Date(startDate);
+    const ovulationDate = new Date(lastPeriodDate);
+    ovulationDate.setDate(lastPeriodDate.getDate() + cycleLength - 14);
+
+    const startFertilePeriod = new Date(ovulationDate);
+    startFertilePeriod.setDate(ovulationDate.getDate() - 4);
+
+    const endFertilePeriod = new Date(ovulationDate);
+    endFertilePeriod.setDate(ovulationDate.getDate() + 4);
+
+    const nidationDate = new Date(ovulationDate);
+    nidationDate.setDate(ovulationDate.getDate() + 5);
+
+    // Ajouter uniquement le premier jour de la période des règles
+    periodDays.add(lastPeriodDate.getDate());
+
+    // Ajouter les jours de fertilité
+    for (
+      let d = startFertilePeriod.getDate();
+      d <= endFertilePeriod.getDate();
+      d++
+    ) {
+      if (d < ovulationDate.getDate()) {
+        moderateRiskDays.add(d);
+      } else {
+        riskDays.add(d);
+      }
+    }
+
+    return {
+      periodDays,
+      moderateRiskDays,
+      riskDays,
+      ovulationDate,
+      nidationDate,
+    };
+  }
+
+  function createCards() {
+    loader.style.display = "flex";
+    carouselContainer.innerHTML = "";
+
     setTimeout(() => {
+      const selectedDay = parseInt(daySelect.value);
       const selectedMonth = parseInt(monthSelect.value);
       const selectedYear = parseInt(yearSelect.value);
+      const cycleLength = parseInt(cycleLengthInput.value);
+
+      const startDate = new Date(selectedYear, selectedMonth, selectedDay);
+
+      const {
+        periodDays,
+        moderateRiskDays,
+        riskDays,
+        ovulationDate,
+        nidationDate,
+      } = calculatePeriod(startDate, cycleLength);
+
       const daysInMonth = new Date(
         selectedYear,
         selectedMonth + 1,
         0
       ).getDate();
 
-      const ovulationDay = daysInMonth - 14; // Calculer le jour d'ovulation
-      const riskDays = new Set();
-
-      // Période de fertilité : 5 jours avant l'ovulation et l'ovulation elle-même
-      for (let i = 0; i <= 5; i++) {
-        if (ovulationDay - i > 0) riskDays.add(ovulationDay - i);
-      }
-
-      // Jours de nidation : 6 jours après l'ovulation
-      for (let i = 1; i <= 6; i++) {
-        if (ovulationDay + i <= daysInMonth) riskDays.add(ovulationDay + i);
-      }
-
-      // Calcul des cartes
+      // Générer les cartes
       for (let day = 1; day <= daysInMonth; day++) {
         const card = document.createElement("div");
         card.classList.add("card");
 
         const imgBloc = document.createElement("div");
-        imgBloc.classList.add("card-image-container");
 
         const img = document.createElement("img");
-        img.classList.add("card-image");
 
         let windSpeed, humidity;
 
-        if (riskDays.has(day)) {
+        if (periodDays.has(day)) {
+          card.classList.add("card-period");
+
+          windSpeed = "20 km/h";
+          humidity = "50%";
+        } else if (riskDays.has(day)) {
           card.classList.add("card-risk");
-          img.src = "/assets/rain_small.webp";
-          windSpeed = "90 km/h"; // Vent élevé pour jours à risque
-          humidity = "0%"; // Humidité basse pour jours à risque
+          windSpeed = "90 km/h";
+          humidity = "0%";
+        } else if (moderateRiskDays.has(day)) {
+          card.classList.add("card-moderate-risk");
+          windSpeed = "50 km/h";
+          humidity = "30%";
         } else {
           card.classList.add("card-safe");
-          img.src = "/assets/sun_small.webp";
-          windSpeed = "0 km/h"; // Pas de vent pour jours sans risque
-          humidity = "90%"; // Humidité élevée pour jours sans risque
+          windSpeed = "0 km/h";
+          humidity = "90%";
         }
 
         imgBloc.appendChild(img);
@@ -111,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const h2 = document.createElement("h2");
         h2.classList.add("card-title");
 
-        h2.textContent = riskDays.has(day) ? "-10°" : "35°"; // Température basée sur le risque
+        h2.textContent = riskDays.has(day) ? "-10°" : "35°";
 
         h2Bloc.appendChild(h2);
         card.appendChild(h2Bloc);
@@ -123,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
         p.classList.add("card-date");
 
         const month = monthNames[selectedMonth];
-        p.textContent = `${day} ${month} ${selectedYear}`; // Afficher le jour, le mois et l'année
+        p.textContent = `${day} ${month} ${selectedYear}`;
 
         const weatherInfo = document.createElement("div");
         weatherInfo.classList.add("weather-info");
@@ -132,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         windDiv.classList.add("wind-info");
 
         const windIcon = document.createElement("img");
-        windIcon.src = "/assets/vent.png"; // Chemin vers l'icône de vent
+        windIcon.src = "/assets/vent.png";
         windIcon.alt = "Vent";
 
         const windText = document.createElement("span");
@@ -145,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         humidityDiv.classList.add("humidity-info");
 
         const humidityIcon = document.createElement("img");
-        humidityIcon.src = "/assets/pluie.png"; // Chemin vers l'icône d'humidité
+        humidityIcon.src = "/assets/pluie.png";
         humidityIcon.alt = "Humidité";
 
         const humidityText = document.createElement("span");
@@ -164,8 +211,8 @@ document.addEventListener("DOMContentLoaded", function () {
         carouselContainer.appendChild(card);
       }
 
-      loader.style.display = "none"; // Masquer le loader après le chargement
-    }, 1500); // Délai de 1,5 seconde pour simuler le chargement
+      loader.style.display = "none";
+    }, 1500);
   }
 
   calculateButton.addEventListener("click", createCards);
