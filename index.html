@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Météo Love</title>
+    <meta name="description"
+        content="Météo Love vous aide à déterminer les périodes propices pour avoir des rapports sexuels sans protection, en toute sécurité. Découvrez votre calendrier fertile et les jours à risque pour planifier vos moments intimes.">
+    <meta name="keywords"
+        content="Météo Love, calendrier de fertilité, rapports sexuels, protection, santé sexuelle, périodes à risque, contraception, ovulation, fertilité">
+    <meta name="author" content="Votre Nom ou Nom de l'entreprise">
+    <link rel="icon" href="/assets/sun_small.webp" type="image/x-icon">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/animation.css" />
 </head>
@@ -13,7 +19,7 @@
     <div class="form-container">
         <div class="logo-container">
             <img src="/assets/logo.png" alt="Logo Risque" class="logo" id="risk-logo">
-            <img src="/assets/fleche-removebg-preview.png" alt="Logo2" class="logo2" id="risk-logo2">
+            <img src="/assets/logo-fleche.png" alt="Logo2" class="logo2" id="risk-logo2">
         </div>
         <div class="flip-card">
             <div class="flip-card-inner">
@@ -92,10 +98,18 @@
                 <div class="flip-card-back">
                     <div class="legende">
                         <h2>Moments favorables pour avoir des relations sexuelles sans protection.</h2>
-                        <div><img src="./assets/regle.png" alt=""> <p>Période de règles sans risque</p></div>
-                        <div><img src="./assets/soleil.png" alt=""> <p>Période sans risque</p></div>
-                        <div><img src="./assets/pluie.PNG" alt=""> <p>Période risquée</p></div>
-                        <div><img src="./assets/orage.png" alt=""> <p>Période très risquée</p></div>
+                        <div><img src="./assets/regle.png" alt="">
+                            <p>Période de règles sans risque</p>
+                        </div>
+                        <div><img src="./assets/soleil.png" alt="">
+                            <p>Période sans risque</p>
+                        </div>
+                        <div><img src="./assets/pluie.PNG" alt="">
+                            <p>Période risquée</p>
+                        </div>
+                        <div><img src="./assets/orage.png" alt="">
+                            <p>Période très risquée</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,27 +122,9 @@
         <span class="loader__element"></span>
     </div>
     <div class="carousel-container" id="carousel-container"></div>
-    <script>
-        document.getElementById("risk-logo").addEventListener("click", function() {
-            // Faire pivoter la carte
-            document.querySelector(".flip-card").classList.toggle("rotated");
-            
-            // Masquer l'image 1 et afficher l'image 2
-            this.style.display = 'none'; // Cela cache le premier logo
-            document.getElementById("risk-logo2").style.display = 'block'; // Affiche le second logo
-        });
-    
-        document.getElementById("risk-logo2").addEventListener("click", function() {
-            // Faire pivoter la carte
-            document.querySelector(".flip-card").classList.toggle("rotated");
-            
-            // Masquer l'image 2 et afficher l'image 1
-            this.style.display = 'none'; // Cela cache le second logo
-            document.getElementById("risk-logo").style.display = 'block'; // Affiche le premier logo
-        });
-    </script>
-    
-    
+
+
+    <script src="/logo.js"></script>
     <script src="/calcul.js"></script>
 </body>
 
