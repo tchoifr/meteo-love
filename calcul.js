@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function calculatePeriod(startDate, cycleLength) {
     const periodDays = new Set();
+    const periodDaysCycle = new Set(); // Nouveau Set pour les jours de cycle
     const riskDays = new Set();
     const moderateRiskDays = new Set();
 
@@ -70,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Ajouter uniquement le premier jour de la période des règles
     periodDays.add(lastPeriodDate.getDate());
+    // Ajouter le jour du cycle correspondant
+    periodDaysCycle.add((lastPeriodDate.getDate() + cycleLength) % 30); // Par exemple, 30 jours dans un mois
 
     // Ajouter les jours de fertilité
     for (
@@ -86,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return {
       periodDays,
+      periodDaysCycle, // Retourner le nouvel ensemble
       moderateRiskDays,
       riskDays,
       ovulationDate,
@@ -105,13 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const startDate = new Date(selectedYear, selectedMonth, selectedDay);
 
-      const {
-        periodDays,
-        moderateRiskDays,
-        riskDays,
-        ovulationDate,
-        nidationDate,
-      } = calculatePeriod(startDate, cycleLength);
+      const { periodDays, periodDaysCycle, moderateRiskDays, riskDays } =
+        calculatePeriod(startDate, cycleLength);
 
       const daysInMonth = new Date(
         selectedYear,
@@ -119,49 +118,29 @@ document.addEventListener("DOMContentLoaded", function () {
         0
       ).getDate();
 
-      // Générer les cartes
+      // Générer les cartes pour chaque jour du mois
       for (let day = 1; day <= daysInMonth; day++) {
         const card = document.createElement("div");
         card.classList.add("card");
 
         const imgBloc = document.createElement("div");
-
         const img = document.createElement("img");
 
-        let windSpeed, humidity;
+        let humidity;
 
-        if (periodDays.has(day)) {
+        // Appliquer les classes selon la logique donnée
+        if (periodDays.has(day) || periodDaysCycle.has(day)) {
           card.classList.add("card-period");
-
-          windSpeed = "20 km/h";
-          humidity = "50%";
         } else if (riskDays.has(day)) {
           card.classList.add("card-risk");
-          windSpeed = "90 km/h";
-          humidity = "0%";
         } else if (moderateRiskDays.has(day)) {
           card.classList.add("card-moderate-risk");
-          windSpeed = "50 km/h";
-          humidity = "30%";
         } else {
           card.classList.add("card-safe");
-          windSpeed = "0 km/h";
-          humidity = "90%";
         }
 
         imgBloc.appendChild(img);
         card.appendChild(imgBloc);
-
-        const h2Bloc = document.createElement("div");
-        h2Bloc.classList.add("card-title-container");
-
-        const h2 = document.createElement("h2");
-        h2.classList.add("card-title");
-
-        h2.textContent = riskDays.has(day) ? "-10°" : "35°";
-
-        h2Bloc.appendChild(h2);
-        card.appendChild(h2Bloc);
 
         const pBloc = document.createElement("div");
         pBloc.classList.add("card-date-container");
@@ -178,31 +157,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const windDiv = document.createElement("div");
         windDiv.classList.add("wind-info");
 
-        const windIcon = document.createElement("img");
-        windIcon.src = "/assets/vent.png";
-        windIcon.alt = "Vent";
-
-        const windText = document.createElement("span");
-        windText.textContent = `Vent: ${windSpeed}`;
-
-        windDiv.appendChild(windIcon);
-        windDiv.appendChild(windText);
-
-        const humidityDiv = document.createElement("div");
-        humidityDiv.classList.add("humidity-info");
-
-        const humidityIcon = document.createElement("img");
-        humidityIcon.src = "/assets/pluie.png";
-        humidityIcon.alt = "Humidité";
-
         const humidityText = document.createElement("span");
         humidityText.textContent = `Humidité: ${humidity}`;
-
-        humidityDiv.appendChild(humidityIcon);
-        humidityDiv.appendChild(humidityText);
-
-        weatherInfo.appendChild(windDiv);
-        weatherInfo.appendChild(humidityDiv);
 
         pBloc.appendChild(weatherInfo);
         pBloc.appendChild(p);

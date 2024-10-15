@@ -7,105 +7,120 @@
     <title>Météo Love</title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/animation.css" />
-
 </head>
 
 <body>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="form-container">
+        <div class="logo-container">
+            <img src="/assets/warning.webp" alt="Logo Risque" class="logo" id="risk-logo">
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h1>Météo Love</h1>
+                    <div class="form-group">
+                        <label for="day">1er jour de vos dernières règles</label>
+                        <select id="day"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="month">Mois</label>
+                        <select id="month">
+                            <option value="0">Janvier</option>
+                            <option value="1">Février</option>
+                            <option value="2">Mars</option>
+                            <option value="3">Avril</option>
+                            <option value="4">Mai</option>
+                            <option value="5">Juin</option>
+                            <option value="6">Juillet</option>
+                            <option value="7">Août</option>
+                            <option value="8">Septembre</option>
+                            <option value="9">Octobre</option>
+                            <option value="10">Novembre</option>
+                            <option value="11">Décembre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Année</label>
+                        <select id="year"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cycle-length">Durée moyenne de vos cycles</label>
+                        <div class="select-wrapper">
+                            <select id="cycle-length">
+                                <option value="14">14 jours</option>
+                                <option value="15">15 jours</option>
+                                <option value="16">16 jours</option>
+                                <option value="17">17 jours</option>
+                                <option value="18">18 jours</option>
+                                <option value="19">19 jours</option>
+                                <option value="20">20 jours</option>
+                                <option value="21">21 jours</option>
+                                <option value="22">22 jours</option>
+                                <option value="23">23 jours</option>
+                                <option value="24">24 jours</option>
+                                <option value="25">25 jours</option>
+                                <option value="26">26 jours</option>
+                                <option value="27">27 jours</option>
+                                <option value="28" selected>28 jours</option>
+                                <option value="29">29 jours</option>
+                                <option value="30">30 jours</option>
+                                <option value="31">31 jours</option>
+                                <option value="32">32 jours</option>
+                                <option value="33">33 jours</option>
+                                <option value="34">34 jours</option>
+                                <option value="35">35 jours</option>
+                                <option value="36">36 jours</option>
+                                <option value="37">37 jours</option>
+                                <option value="38">38 jours</option>
+                                <option value="39">39 jours</option>
+                                <option value="40">40 jours</option>
+                                <option value="41">41 jours</option>
+                                <option value="42">42 jours</option>
+                                <option value="43">43 jours</option>
+                                <option value="44">44 jours</option>
+                                <option value="45">45 jours</option>
+                                <option value="46">46 jours</option>
+                                <option value="47">47 jours</option>
+                                <option value="48">48 jours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="calculate-button">Valider</button>
 
-    <div class="form-container" >
-        <h1>Météo Love</h1>
-        <div class="form-group">
-            <label for="day">1er jour de vos dernières règles</label>
-            <select id="day"></select>
-        </div>
-        <div class="form-group">
-            <label for="month">Mois</label>
-            <select id="month">
-                <option value="0">Janvier</option>
-                <option value="1">Février</option>
-                <option value="2">Mars</option>
-                <option value="3">Avril</option>
-                <option value="4">Mai</option>
-                <option value="5">Juin</option>
-                <option value="6">Juillet</option>
-                <option value="7">Août</option>
-                <option value="8">Septembre</option>
-                <option value="9">Octobre</option>
-                <option value="10">Novembre</option>
-                <option value="11">Décembre</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="year">Année</label>
-            <select id="year"></select>
-        </div>
-        <div class="form-group">
-            <label for="cycle-length">Durée moyenne de vos cycles</label>
-            <div class="select-wrapper">
-                <select id="cycle-length">
-                    <!-- Options pour les durées de cycle de 14 à 48 jours -->
-                    <option value="14">14 jours</option>
-                    <option value="15">15 jours</option>
-                    <option value="16">16 jours</option>
-                    <option value="17">17 jours</option>
-                    <option value="18">18 jours</option>
-                    <option value="19">19 jours</option>
-                    <option value="20">20 jours</option>
-                    <option value="21">21 jours</option>
-                    <option value="22">22 jours</option>
-                    <option value="23">23 jours</option>
-                    <option value="24">24 jours</option>
-                    <option value="25">25 jours</option>
-                    <option value="26">26 jours</option>
-                    <option value="27">27 jours</option>
-                    <option value="28" selected>28 jours</option>
-                    <option value="29">29 jours</option>
-                    <option value="30">30 jours</option>
-                    <option value="31">31 jours</option>
-                    <option value="32">32 jours</option>
-                    <option value="33">33 jours</option>
-                    <option value="34">34 jours</option>
-                    <option value="35">35 jours</option>
-                    <option value="36">36 jours</option>
-                    <option value="37">37 jours</option>
-                    <option value="38">38 jours</option>
-                    <option value="39">39 jours</option>
-                    <option value="40">40 jours</option>
-                    <option value="41">41 jours</option>
-                    <option value="42">42 jours</option>
-                    <option value="43">43 jours</option>
-                    <option value="44">44 jours</option>
-                    <option value="45">45 jours</option>
-                    <option value="46">46 jours</option>
-                    <option value="47">47 jours</option>
-                    <option value="48">48 jours</option>
-                </select>
+                </div>
+                <div class="flip-card-back">
+                    <div class="legende">
+                        <div><img src="./assets/regle.png" alt=""> <p>Période de règles</p></div>
+                        <div><img src="./assets/soleil.png" alt=""> <p>Période sans risque</p></div>
+                        <div><img src="./assets/pluie.PNG" alt=""> <p>Période un peu risquée</p></div>
+                        <div><img src="./assets/orage.png" alt=""> <p>Période très risquée</p></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <button id="calculate-button">Valider</button>
-       <div>
-<div class="legende"> <img src="./assets/regle.png" alt=""> <p>Période de règles</p></div>
-<div  class="legende"> <img src="./assets/soleil.png" alt=""> <p>Période sans risque</p></div>
-<div  class="legende"> <img src="./assets/pluie.PNG" alt=""> <p>Période un peu risquée</p></div>
-<div  class="legende"> <img src="./assets/orage.png" alt=""> <p>Période très risquée</p></div>
-       </div>
     </div>
 
-    </div>
     <div id="loader" class="loader" style="display: none;">
         <span class="loader__element"></span>
         <span class="loader__element"></span>
         <span class="loader__element"></span>
-      </div>
+    </div>
     <div class="carousel-container" id="carousel-container"></div>
-
-    
-      
-   
-   
-
+<script>document.getElementById("risk-logo").addEventListener("click", function() {
+    document.querySelector(".flip-card").classList.toggle("rotated");
+});
+</script>
     <script src="/calcul.js"></script>
-   
 </body>
 
 </html>
