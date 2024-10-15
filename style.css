@@ -5,66 +5,17 @@
 /* body fond */
 
 body {
+    
+    height: 100vh;
     position: relative;
-    overflow: hidden; /* Pour éviter les barres de défilement */
    text-align: center;
-  
-    background: black;
+   background-color: #0093E9;
+   background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+      background-repeat: no-repeat;
+   margin: 0px;
   }
   
-  .shooting-star {
-    position: absolute;
-    width: 2px; /* Largeur de l'étoile filante */
-    height: 10px; /* Hauteur de l'étoile filante */
-    background: var(--glow-color);
-    opacity: 0.8;
-    animation: shoot 1.5s linear infinite;
-  }
-  
-  @keyframes shoot {
-    0% {
-      transform: translateY(-100vh) rotate(45deg); /* Début en haut de l'écran */
-      opacity: 1; /* Opacité maximale au début */
-    }
-    50% {
-      opacity: 1; /* Opacité maximale au milieu */
-    }
-    100% {
-      transform: translateY(100vh) translateX(50vw) rotate(45deg); /* Se déplace vers le bas et un peu à droite */
-      opacity: 0; /* Disparaît à la fin */
-    }
-  }
-  
-  /* Générer des étoiles filantes aléatoires */
-  .shooting-star:nth-child(1) {
-    left: 0%;
-    animation-duration: 2s;
-    animation-delay: 0s;
-  }
-  
-  .shooting-star:nth-child(2) {
-    left: 20%;
-    animation-duration: 2.5s;
-    animation-delay: 0.5s;
-  }
-  
-  .shooting-star:nth-child(3) {
-    left: 40%;
-    animation-duration: 2s;
-    animation-delay: 1s;
-  }
-  
-  .shooting-star:nth-child(4) {
-    left: 60%;
-    animation-duration: 2.5s;
-    animation-delay: 1.5s;
-  }
-  
-  .shooting-star:nth-child(5) {
-    left: 80%;
-    animation-duration: 2s;
-    animation-delay: 2s;
-  }
+
 /* fin body */
 h1 {
     color: var(--glow-color);
@@ -72,20 +23,23 @@ h1 {
 }
 
 .form-container {
-    background-color: #fff;
+    background-color: #101422;
     border-radius: 8px;
     padding: 0px 30px 0px 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
-    background-color: #eff3f9;
     position: relative;
     width: 300px;
     perspective: 1000px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  
 }
-body {
-    font-family: Arial, sans-serif;
+.form-container label{
+    color: white;
 }
-
+.form-container p{
+    color: white;
+}
 
 
 .logo-container {
@@ -96,11 +50,22 @@ body {
 }
 
 .logo {
-    width: 40px; /* Ajustez la taille du logo */
+    width: 40px; 
     height: auto;
-    cursor: pointer; /* Pour indiquer que le logo est cliquable */
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 6px var(--glow-color));
+    transition: opacity 0.3s ease-in-out; 
 }
+.logo2 {
+    width: 40px; 
+    height: auto;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 6px var(--glow-color));
+    transition: opacity 0.3s ease-in-out; 
+    display: none;
+    transform: rotate(180deg); /* Faire pivoter le logo de 180 degrés */
 
+}
 .flip-card {
     position: relative;
     width: 100%;
@@ -244,7 +209,7 @@ input[type="number"] {
 
 @media only screen and (max-width: 600px) {
   #calculate-button {
-    font-size: 1em; /* Ajustez la taille pour les petits écrans */
+    font-size: 1em; 
   }
 }
 
@@ -272,12 +237,13 @@ input[type="number"] {
 /* Carousel Styles */
 .carousel-container {
     display: flex;
-    overflow-x: auto; /* Défilement horizontal */
-    scroll-behavior: smooth; /* Défilement fluide */
-    white-space: nowrap; /* Empêche les éléments de passer à la ligne */
-    gap: 10px; /* Ajoute un espace entre les cartes */
-    -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur mobile */
-    background-color: black;
+    overflow-x: auto; 
+    scroll-behavior: smooth; 
+    white-space: nowrap;
+    gap: 10px; 
+    -webkit-overflow-scrolling: touch; 
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
 }
 
 
@@ -290,8 +256,8 @@ input[type="number"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10px 5px; /* Espacement entre les cartes */
-    flex-shrink: 0; /* Empêche les cartes de rétrécir */
+    margin: 20px 10px; 
+    flex-shrink: 0; 
     min-height: 225px;
 
 }
@@ -340,14 +306,19 @@ input[type="number"] {
     align-items: center;
     flex-direction: column;
 }
+.legende p{
+    margin: 0px 0px 10px 0px;
+}
+.legende h2{
+    color: var(--glow-color);
+    font-size: 15px;
+}
 .legende img{
     width: 50px;
     height: 50px;
     object-fit: contain;
 }
-.p-legend{
 
-}
 .card-period {
     background-image: url(./assets/regle.PNG);
     background-size: cover;
