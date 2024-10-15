@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     startFertilePeriod.setDate(ovulationDate.getDate() - 4);
 
     const endFertilePeriod = new Date(ovulationDate);
-    endFertilePeriod.setDate(ovulationDate.getDate() + 4);
+    endFertilePeriod.setDate(ovulationDate.getDate() + 5);
 
     const nidationDate = new Date(ovulationDate);
     nidationDate.setDate(ovulationDate.getDate() + 5);
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ajouter uniquement le premier jour de la période des règles
     periodDays.add(lastPeriodDate.getDate());
     // Ajouter le jour du cycle correspondant
-    periodDaysCycle.add((lastPeriodDate.getDate() + cycleLength) % 30); // Par exemple, 30 jours dans un mois
+    periodDaysCycle.add(lastPeriodDate.getDate() + cycleLength);
 
     // Ajouter les jours de fertilité
     for (
