@@ -25,7 +25,6 @@ h1 {
 .form-container {
     background-color: #101422;
     border-radius: 8px;
-    padding: 0px 30px 0px 40px;
     display: inline-block;
     position: relative;
     width: 300px;
@@ -49,13 +48,23 @@ h1 {
     z-index: 1000;
 }
 
-.logo {
-    width: 40px; 
-    height: auto;
-    cursor: pointer;
-    filter: drop-shadow(0px 0px 6px var(--glow-color));
-    transition: opacity 0.3s ease-in-out; 
-}
+@keyframes clignotement {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  .logo {
+      width: 40px; 
+      height: auto;
+      cursor: pointer;
+      filter: drop-shadow(0px 0px 6px var(--glow-color));
+      transition: opacity 0.3s ease-in-out;
+      animation: clignotement 2s infinite; 
+  }
 .logo2 {
     width: 40px; 
     height: auto;
@@ -63,13 +72,13 @@ h1 {
     filter: drop-shadow(0px 0px 6px var(--glow-color));
     transition: opacity 0.3s ease-in-out; 
     display: none;
-    transform: rotate(180deg); /* Faire pivoter le logo de 180 degrés */
+    transform: rotate(180deg); 
 
 }
 .flip-card {
     position: relative;
     width: 100%;
-    height: 500px; /* Ajustez la hauteur selon vos besoins */
+    height: 500px; 
     transform-style: preserve-3d;
     transition: transform 0.6s;
 }
@@ -87,6 +96,10 @@ h1 {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .flip-card-back {
@@ -98,11 +111,11 @@ h1 {
 }
 
 .legende {
-    padding: 20px; /* Ajustez l'espacement selon vos besoins */
+    padding: 20px; 
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin: 0px 5px 20px 0px;
 }
 
 label {
@@ -138,13 +151,11 @@ input[type="number"] {
   background: none;
   perspective: 2em;
   font-family: "Raleway", sans-serif;
-  font-size: 1.2em; /* Vous pouvez ajuster la taille de police ici */
+  font-size: 1.2em; 
   font-weight: 900;
-  letter-spacing: 0.1em; /* Ajuster l'espacement des lettres selon vos préférences */
-
+  letter-spacing: 0.1em; 
   box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
     0px 0px 0.5em 0px var(--glow-color);
-  animation: border-flicker 2s linear infinite;
 }
 
 #calculate-button::before {
@@ -314,9 +325,10 @@ input[type="number"] {
     font-size: 15px;
 }
 .legende img{
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
+    border-radius: 10px;
 }
 
 .card-period {
